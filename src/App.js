@@ -17,11 +17,51 @@ class App extends Component {
       });
    };
 
+   handleSortPop = () => {
+      const { contacts } = this.state;
+      let clonedContacts = JSON.parse(JSON.stringify(contacts));
+
+      clonedContacts.sort((a, b) => {
+         if (a.popularity > b.popularity) {
+            return 1;
+         } else if (a.popularity < b.popularity) {
+            return -1;
+         } else {
+            return 0;
+         }
+      });
+
+      this.setState({
+         contacts: clonedContacts,
+      });
+   };
+
+   handleSortName = () => {
+      const { contacts } = this.state;
+      let clonedContacts = JSON.parse(JSON.stringify(contacts));
+
+      clonedContacts.sort((a, b) => {
+         if (a.name > b.name) {
+            return 1;
+         } else if (a.name < b.name) {
+            return -1;
+         } else {
+            return 0;
+         }
+      });
+
+      this.setState({
+         contacts: clonedContacts,
+      });
+   };
+
    render() {
       const { contacts } = this.state;
       return (
          <ul>
             <button onClick={this.handleAdd}>Add</button>
+            <button onClick={this.handleSortName}>Sort Alpabetically</button>
+            <button onClick={this.handleSortPop}>Sort Popularity</button>
             {contacts.map((singleContact) => {
                return (
                   <>
