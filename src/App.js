@@ -55,6 +55,18 @@ class App extends Component {
       });
    };
 
+   handleDelete = (someId) => {
+      console.log("Delete works", someId);
+      const { contacts } = this.state;
+      let filteredContacts = contacts.filter((single) => {
+         return single.id !== someId;
+      });
+
+      this.setState({
+         contacts: filteredContacts,
+      });
+   };
+
    render() {
       const { contacts } = this.state;
       return (
@@ -62,6 +74,7 @@ class App extends Component {
             <button onClick={this.handleAdd}>Add</button>
             <button onClick={this.handleSortName}>Sort Alpabetically</button>
             <button onClick={this.handleSortPop}>Sort Popularity</button>
+
             {contacts.map((singleContact) => {
                return (
                   <>
@@ -73,6 +86,13 @@ class App extends Component {
                      </li>
                      <li>{singleContact.name} </li>
                      <li>{singleContact.popularity} </li>
+                     <button
+                        onClick={() => {
+                           this.handleDelete(singleContact.id);
+                        }}
+                     >
+                        Delete
+                     </button>
                   </>
                );
             })}
